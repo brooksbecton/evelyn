@@ -30,7 +30,11 @@ export default class App extends React.Component {
 function GuideList(props) {
   const guides = props.guides;
   const listItems = guides.map((guide) =>
-    <li key={guide.id}><a href={guide.url} target="_blank">{guide.name}</a></li>
+    {
+      if(guide.status_label == "Published"){
+        return <li key={guide.id}><a href={guide.url} target="_blank">{guide.name}</a></li>
+      }
+    }
   );
   return (
     <ul>{listItems}</ul>
@@ -41,8 +45,6 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: '', guides: ''};
-
-    console.log(env);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
