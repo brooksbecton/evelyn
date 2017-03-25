@@ -55,7 +55,8 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
+      <main>
+        <h1>Search Guides</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             Search for a Guide:
@@ -66,7 +67,7 @@ class Search extends React.Component {
         {this.state.guides &&
           <GuideList guides={this.state.guides}></GuideList>
         }
-      </div>
+      </main>
     );
   }
 }
