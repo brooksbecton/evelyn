@@ -7,6 +7,8 @@ import {
 
 import axios from 'axios'
 
+const env = require('./../env.js')
+
 export default class App extends React.Component {
   render() {
     return (
@@ -28,7 +30,7 @@ export default class App extends React.Component {
 function GuideList(props) {
   const guides = props.guides;
   const listItems = guides.map((guide) =>
-    <li key={guide.id}>{guide.title.rendered}</li>
+    <li key={guide.id}><a href={guide.url} target="_blank">{guide.name}</a></li>
   );
   return (
     <ul>{listItems}</ul>
@@ -40,12 +42,17 @@ class Search extends React.Component {
     super(props);
     this.state = {value: '', guides: ''};
 
+    console.log(env);
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   searchGuides(q){
-    const targetUrl = "http://192.168.0.106/wp-json/wp/v2/posts/";
+    const api_key = env.API_KEY;
+    const site_id = env.SITE_ID;
+    const targetUrl = "http://lgapi-us.libapps.com/1.1/guides/?site_id="+
+                       site_id + "&key=" + api_key + "&search_terms=" + q;
     axios.get(targetUrl)
       .then(res => {
         const guides = res.data.map(obj => obj);
