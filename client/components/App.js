@@ -5,6 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 
+import axios from 'axios'
 
 export default class App extends React.Component {
   render() {
@@ -24,13 +25,32 @@ export default class App extends React.Component {
   }
 }
 
+function GuideList(props) {
+  const guides = props.guides;
+  const listItems = guides.map((guide) =>
+    <li key={guide.id}>{guide.title.rendered}</li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: '', guides: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  searchGuides(q){
+    const targetUrl = "http://192.168.0.106/wp-json/wp/v2/posts/";
+    axios.get(targetUrl)
+      .then(res => {
+        const guides = res.data.map(obj => obj);
+        this.setState({ guides });
+    });
   }
 
   handleChange(event) {
@@ -38,20 +58,25 @@ class Search extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    this.searchGuides(this.state.value);
   }
 
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Search for a Guide:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Search for a Guide:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        {this.state.guides &&
+          <GuideList guides={this.state.guides}></GuideList>
+        }
+      </div>
     );
   }
 }
