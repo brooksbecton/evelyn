@@ -32,7 +32,12 @@ function GuideList(props) {
   const listItems = guides.map((guide) =>
     {
       if(guide.status_label == "Published"){
-        return <li key={guide.id}><a href={guide.url} target="_blank">{guide.name}</a></li>
+        return <li key={guide.id}>
+          <a href={guide.url} target="_blank">{guide.name}</a>
+          <p>{guide.description}</p>
+          <p>Last Updated: {(guide.updated).split(" ")[0]}</p>
+          <p>Hits: {guide.count_hit}</p>
+        </li>
       }
     }
   );
