@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import axios from 'axios'
 const env = require('./../env.js')
 
-import GuideList from './GuideList'
+import GuideList from './GuideList/GuideList'
 
 class Search extends React.Component {
   constructor(props) {

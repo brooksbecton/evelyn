@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import axios from 'axios'
 import * as firebase from "firebase";
 
 import FavoriteGuideButton from './FavoriteGuideButton'

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import axios from 'axios'
-import GuideList from './GuideList'
+import GuideList from './GuideList/GuideList'
 
 const env = require('./../env.js')
 

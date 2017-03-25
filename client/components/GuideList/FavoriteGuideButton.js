@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react';
-import axios from 'axios'
+import React from 'react';
 import * as firebase from "firebase";
 
 class FavoriteGuideButton extends React.Component {
