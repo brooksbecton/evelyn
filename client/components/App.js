@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 
 import Search from './Search'
+import Welcome from './Welcome'
 
 export default class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
             <li><Link to="/Search">Search</Link></li>
           </ul>
         </nav>
+        <Route exact={true} path="/" component={Welcome}></Route>
         <Route path="/Search" component={Search}></Route>
         </div>
       </Router>

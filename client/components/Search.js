@@ -1,26 +1,8 @@
 import React, {PropTypes} from 'react';
 import axios from 'axios'
-
 const env = require('./../env.js')
 
-function GuideList(props) {
-  const guides = props.guides;
-  const listItems = guides.map((guide) =>
-    {
-      if(guide.status_label == "Published"){
-        return <li key={guide.id}>
-          <a href={guide.url} target="_blank">{guide.name}</a>
-          <p>{guide.description}</p>
-          <p>Last Updated: {(guide.updated).split(" ")[0]}</p>
-          <p>Hits: {guide.count_hit}</p>
-        </li>
-      }
-    }
-  );
-  return (
-    <ul>{listItems}</ul>
-  );
-}
+import GuideList from './GuideList'
 
 class Search extends React.Component {
   constructor(props) {
