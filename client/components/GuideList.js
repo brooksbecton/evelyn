@@ -1,12 +1,28 @@
 import React, { PropTypes } from 'react';
 import axios from 'axios'
+import * as firebase from "firebase";
 
-const env = require('./../env.js')
+import FavoriteGuideButton from './FavoriteGuideButton'
 
 class GuideList extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {uid: null};
+        this.getUserId();
+    }
+
+    getUserId() {
+        firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            const uid = user.uid;
+            this.setState({ uid: uid });
+        } else {
+            // User is signed out.
+            // ...
+        }
+        });
     }
 
     render() {
@@ -18,6 +34,7 @@ class GuideList extends React.Component {
                         <p>{guide.description}</p>
                         <p>Last Updated: {(guide.updated).split(" ")[0]}</p>
                         <p>Hits: {guide.count_hit}</p>
+                        <FavoriteGuideButton uid={this.state.uid} gid={guide.id}></FavoriteGuideButton>
                     </li>
                 })
                 }</ul>
