@@ -27,7 +27,19 @@ module.exports = {
   },
   plugins: [
     HtmlWebpackPluginConfig,
-    new Dotenv,
-    // new webpack.optimize.UglifyJsPlugin()
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        API_KEY: JSON.stringify(process.env.API_KEY),
+        SITE_ID: JSON.stringify(process.env.SITE_ID),
+        FBAPIKEY: JSON.stringify(process.env.FBAPIKEY),
+        FBAUTHDOMAIN: JSON.stringify(process.env.FBAUTHDOMAIN),
+        FBDBURL: JSON.stringify(process.env.FBDBURL),
+        FBSTORAGEBUCKET: JSON.stringify(process.env.FBSTORAGEBUCKET),
+        FBMESSAGINGSENDERID: JSON.stringify(process.env.FBMESSAGINGSENDERID),
+      },
+    }),
+    //new webpack.optimize.UglifyJsPlugin()
   ]
 }
