@@ -15,7 +15,6 @@ class FavoriteGuideButton extends React.Component {
 
     }
 
-
     //When button is clicked, we'll save the guides id to the user's db
     setFavorite() {
         const gid = this.props.gid;
