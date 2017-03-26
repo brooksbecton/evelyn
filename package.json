@@ -5,7 +5,8 @@
   "repository": "git@github.com:andela-jwarugu/react-startpack.git",
   "author": "andela-jwarugu <joy.warugu@andela.com>",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack -p & node server.js",
+    "dev": "webpack-dev-server"
   },
   "license": "MIT",
   "devDependencies": {
@@ -18,7 +19,9 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "express": "^4.15.2",
     "firebase": "^3.7.3",
+    "path": "^0.12.7",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router-dom": "^4.0.0",
