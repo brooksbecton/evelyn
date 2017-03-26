@@ -1,10 +1,11 @@
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/index.html',
   filename: 'index.html',
   inject: 'body'
 })
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
   devServer: {
@@ -25,7 +26,13 @@ module.exports = {
     fs: "empty"
   },
   plugins: [
-      HtmlWebpackPluginConfig,
-      new Dotenv()
-    ]
+    HtmlWebpackPluginConfig,
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  ]
 }
