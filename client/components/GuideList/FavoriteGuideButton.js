@@ -1,5 +1,6 @@
 import React from 'react';
 import * as firebase from "firebase";
+import RaisedButton from 'material-ui/RaisedButton';
 
 class FavoriteGuideButton extends React.Component {
 
@@ -41,7 +42,7 @@ class FavoriteGuideButton extends React.Component {
     render() {
         return (
             <div>{this.state.uid && this.state.showButton &&
-                <button onClick={() => this.toggleButton()}>Favorite</button>
+                <RaisedButton onClick={() => this.toggleButton()}>Favorite</RaisedButton>
             }
             </div>
         )
