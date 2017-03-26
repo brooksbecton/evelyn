@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "dotenv-webpack": "^1.4.3",
     "express": "^4.15.2",
     "firebase": "^3.7.3",
     "path": "^0.12.7",

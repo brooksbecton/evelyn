@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import axios from 'axios'
 import GuideList from './GuideList/GuideList'
 
-const env = require('./../env.js')
 
 class Welcome extends React.Component {
     constructor(props) {
@@ -13,10 +12,10 @@ class Welcome extends React.Component {
 
     //Pulls the top N guides based on hit count 
     getTopGuides(){
-        const api_key = env.API_KEY;
-        const site_id = env.SITE_ID;
+        const api_key = process.env.API_KEY;
+        const site_id = process.env.SITE_ID;
         const targetUrl = "http://lgapi-us.libapps.com/1.1/guides/?site_id="+
-                        site_id + "&key=" + api_key + "&sort_by=count_hit";
+                           site_id + "&key=" + api_key + "&sort_by=count_hit";
         const topGuideCount = 9;
 
         let topGuides = [];

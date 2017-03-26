@@ -5,9 +5,18 @@ import {
     Link
 } from 'react-router-dom'
 import * as firebase from "firebase";
-const env = require('./../../env.js')
 
-firebase.initializeApp(env.config);
+const config ={
+        apiKey: process.env.FBAPIKEY,
+        authDomain:  process.env.FBAUTHDOMAIN,
+        databaseURL:  process.env.FBDBURL,
+        storageBucket:  process.env.FBSTORAGEBUCKET,
+        messagingSenderId: process.env.FBMESSAGINGSENDERID 
+}
+
+console.log(process.env);
+
+firebase.initializeApp(config);
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export default class TopNavBar extends React.Component {

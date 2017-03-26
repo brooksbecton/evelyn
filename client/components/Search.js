@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import axios from 'axios'
-const env = require('./../env.js')
 
 import GuideList from './GuideList/GuideList'
+
 
 class Search extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Search extends React.Component {
     const api_key = env.API_KEY;
     const site_id = env.SITE_ID;
     const targetUrl = "http://lgapi-us.libapps.com/1.1/guides/?site_id="+
-                       site_id + "&key=" + api_key + "&search_terms=" + q;
+                       process.env.SITE_ID + "&key=" + process.env.API_KEY + "&search_terms=" + q;
     axios.get(targetUrl)
       .then(res => {
         const guides = res.data.map(obj => obj);

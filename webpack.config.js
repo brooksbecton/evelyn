@@ -4,6 +4,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 })
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devServer: {
@@ -20,5 +21,11 @@ module.exports = {
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  node: {
+    fs: "empty"
+  },
+  plugins: [
+      HtmlWebpackPluginConfig,
+      new Dotenv()
+    ]
 }
