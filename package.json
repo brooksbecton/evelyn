@@ -5,9 +5,9 @@
   "repository": "git@github.com:andela-jwarugu/react-startpack.git",
   "author": "andela-jwarugu <joy.warugu@andela.com>",
   "scripts": {
-    "start": "webpack -p & node server.js",
+    "start": "node server.js",
     "dev": "webpack-dev-server",
-    "heroku-postbuild": "webpack -p"
+    "heroku-postbuild": "webpack"
   },
   "license": "MIT",
   "devDependencies": {
