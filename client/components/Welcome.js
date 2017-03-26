@@ -9,6 +9,7 @@ class Welcome extends React.Component {
         super(props);
         this.state = { 
             guides: [],
+            userGuides: [],
             //The number of guides displayed on the welcome page
             guideCount: 9 
         };
@@ -43,8 +44,6 @@ class Welcome extends React.Component {
         const targetUrl = "//lgapi-us.libapps.com/1.1/guides/?site_id=" +
             site_id + "&key=" + api_key + "&sort_by=count_hit";
 
-
-
         let topGuides = [];
 
         axios.get(targetUrl)
@@ -76,7 +75,7 @@ class Welcome extends React.Component {
             userGuidesIds.map((gid) => {
                 this.getGuideInfo(gid).then(res => {
                     userGuides.push(res.data[0]);
-                    this.setState({ guides: userGuides });
+                    this.setState({ userGuides: userGuides });
                 });
             });
         });
@@ -93,9 +92,8 @@ class Welcome extends React.Component {
                 const uid = user.uid;
                 this.setState({ uid: uid });
                 this.getUserGuides();
-            } else {
-                this.getTopGuides();
-            }
+            } 
+            this.getTopGuides();
         });
     }
 
@@ -103,8 +101,10 @@ class Welcome extends React.Component {
         return (
             <main >
                 <h1>Welcome</h1>
-                <GuideList guides={this.state.guides}></GuideList>
-
+                {this.state.guides && this.state.userGuides ?
+                <GuideList guides={this.state.guides} userGuides={this.state.userGuides}></GuideList>:
+                <p>Loading</p>
+                }
             </main >
         )
     }

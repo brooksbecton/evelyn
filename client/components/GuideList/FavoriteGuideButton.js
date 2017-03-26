@@ -8,6 +8,7 @@ class FavoriteGuideButton extends React.Component {
 
         this.state = {
             gid: null, //The guide that the fav button is related to 
+            showButton: true,  //Bool for showing button or not
             uid: null  //The user's id that is trying to favorite
         }
         this.state.gid = props.gid;
@@ -30,10 +31,17 @@ class FavoriteGuideButton extends React.Component {
         });
     }
 
+    toggleButton(){
+        let shown = this.state.showButton;
+        shown = !shown;
+        this.setState({showButton: shown});
+        this.setFavorite()
+    }
+
     render() {
         return (
-            <div>{this.props.uid &&
-                <button onClick={() => this.setFavorite()}>Favorite</button>
+            <div>{this.state.uid && this.state.showButton &&
+                <button onClick={() => this.toggleButton()}>Favorite</button>
             }
             </div>
         )
