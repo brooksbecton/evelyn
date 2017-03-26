@@ -4,14 +4,19 @@ import {
     Route,
     Link
 } from 'react-router-dom'
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import * as firebase from "firebase";
 
-const config ={
-        apiKey: process.env.FBAPIKEY,
-        authDomain:  process.env.FBAUTHDOMAIN,
-        databaseURL:  process.env.FBDBURL,
-        storageBucket:  process.env.FBSTORAGEBUCKET,
-        messagingSenderId: process.env.FBMESSAGINGSENDERID 
+const config = {
+    apiKey: process.env.FBAPIKEY,
+    authDomain: process.env.FBAUTHDOMAIN,
+    databaseURL: process.env.FBDBURL,
+    storageBucket: process.env.FBSTORAGEBUCKET,
+    messagingSenderId: process.env.FBMESSAGINGSENDERID
 }
 
 firebase.initializeApp(config);
@@ -21,10 +26,17 @@ export default class TopNavBar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { user: {} };
+        this.state = { user: {}, open: false };
 
-        this.userSignedIn()
+        this.userSignedIn();
+        this.handleToggle = this.handleToggle.bind(this);
+
     }
+
+    handleToggle() {
+        this.setState({ open: !this.state.open });
+    };
+
     /**
      * Prompts user for sign in from Firebase Auth with pop up
      * Sets state's user to user from Firebase
@@ -77,14 +89,19 @@ export default class TopNavBar extends React.Component {
     render() {
         return (
             <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/Search">Search</Link></li>
+                <RaisedButton
+                    label="Toggle Drawer"
+                    onTouchTap={this.handleToggle}
+                />
+                <Drawer onTouchTap={this.handleToggle} open={this.state.open}>
+                    <Link to="/"><MenuItem>Home</MenuItem></Link>
+                    <Link to="/Search"><MenuItem>Search</MenuItem></Link>
                     {this.state.user.displayName == undefined ?
-                        <li><button onClick={() => this.signIn()}>Sign In</button></li> :
-                        <li><button onClick={() => this.signOut()}>{this.state.user.displayName}</button></li>
+                        <MenuItem onClick={() => this.signIn()}>Sign In</MenuItem> :
+                        <MenuItem onClick={() => this.signOut()}>{this.state.user.displayName}</MenuItem>
                     }
-                </ul>
+                    <MenuItem onTouchTap={this.handleToggle}>Close</MenuItem>
+                </Drawer>
             </nav>
         );
     }

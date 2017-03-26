@@ -4,6 +4,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Search from './Search'
 import Welcome from './Welcome'
@@ -16,13 +17,15 @@ export default class App extends React.Component {
  
   render() {
     return (
-      <Router>
-        <div>
-          <TopNavBar></TopNavBar>
-          <Route exact={true} path="/" component={Welcome}></Route>
-          <Route path="/Search" component={Search}></Route>
-        </div>
-      </Router>
+      <MuiThemeProvider>
+        <Router>
+          <div>
+            <TopNavBar></TopNavBar>
+            <Route exact={true} path="/" component={Welcome}></Route>
+            <Route path="/Search" component={Search}></Route>
+          </div>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }
