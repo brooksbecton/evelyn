@@ -6,7 +6,8 @@
   "author": "andela-jwarugu <joy.warugu@andela.com>",
   "scripts": {
     "start": "webpack -p & node server.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "heroku-postbuild": "webpack -p"
   },
   "license": "MIT",
   "devDependencies": {
