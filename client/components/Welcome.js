@@ -14,7 +14,7 @@ class Welcome extends React.Component {
     getTopGuides(){
         const api_key = process.env.API_KEY;
         const site_id = process.env.SITE_ID;
-        const targetUrl = "http://lgapi-us.libapps.com/1.1/guides/?site_id="+
+        const targetUrl = "https://lgapi-us.libapps.com/1.1/guides/?site_id="+
                            site_id + "&key=" + api_key + "&sort_by=count_hit";
         const topGuideCount = 9;
 
