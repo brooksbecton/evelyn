@@ -22,11 +22,13 @@ export default class TopNavBar extends React.Component {
         super(props);
 
         this.state = { user: {} };
-        this.signIn = this.signIn.bind(this);
-        this.signOut = this.signOut.bind(this);
 
         this.userSignedIn()
     }
+    /**
+     * Prompts user for sign in from Firebase Auth with pop up
+     * Sets state's user to user from Firebase
+     */
     signIn() {
         const _this = this;
 
@@ -44,6 +46,10 @@ export default class TopNavBar extends React.Component {
 
     }
 
+    /**
+     * Signs current user out
+     * Sets state's user to an empty object
+     */
     signOut() {
         const _this = this;
         firebase.auth().signOut().then(function () {
@@ -52,7 +58,10 @@ export default class TopNavBar extends React.Component {
             console.error('Sign Out Error', error);
         });
     }
-
+    /**
+     * Asks Firebase Auth for the current user
+     * Sets state's user to current user
+     */
     userSignedIn() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {

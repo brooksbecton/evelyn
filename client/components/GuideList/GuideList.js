@@ -12,6 +12,10 @@ class GuideList extends React.Component {
         this.getUserId();
     }
 
+    /**
+     * Asks Firebase Auth for the current user
+     * Sets state's uid to current user's uid
+     */
     getUserId() {
         firebase.auth().onAuthStateChanged((user) => {
         if (user) {

@@ -18,7 +18,11 @@ class Welcome extends React.Component {
 
     }
 
-    //
+    /**
+     * Queries LibGuide for guide based on guide id
+     * @param {Number} gid
+     * @return {Promise} guide
+     */
     getGuideInfo(gid) {
         const api_key = process.env.API_KEY;
         const site_id = process.env.SITE_ID;
@@ -29,8 +33,10 @@ class Welcome extends React.Component {
         return axios.get(targetUrl);
 
     }
-
-    //Pulls the top N guides based on hit count 
+    /**
+     * Pulls the top N guides based on hit count, where N is the state's guideCount
+     * Sets state's guides to top guide
+     */
     getTopGuides() {
         const api_key = process.env.API_KEY;
         const site_id = process.env.SITE_ID;
@@ -53,7 +59,10 @@ class Welcome extends React.Component {
             });
     }
 
-    //Gets the guides that the user has already saved
+    /**
+     * Queries Firebase DB for user's guide ID's then pulls each guide form LibGuide
+     * Sets state's guide to the user's guide returned. 
+     */
     getUserGuides() {
         let userGuidesIds = [];
         let userGuides = [];
@@ -73,6 +82,11 @@ class Welcome extends React.Component {
         });
     }
 
+   /**
+    * Getting current user from firebase auth
+    * then getting user's guide if signed in
+    * otherwise getting the top guides. 
+    */
     getUserId() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
