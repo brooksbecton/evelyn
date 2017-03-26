@@ -92,7 +92,7 @@ class Welcome extends React.Component {
                 const uid = user.uid;
                 this.setState({ uid: uid });
                 this.getUserGuides();
-            } 
+            }
             this.getTopGuides();
         });
     }

@@ -89,16 +89,16 @@ export default class TopNavBar extends React.Component {
     render() {
         return (
             <nav>
-                <RaisedButton
-                    label="Toggle Drawer"
+                <AppBar
+                    Title="Evelyn"
                     onTouchTap={this.handleToggle}
                 />
                 <Drawer onTouchTap={this.handleToggle} open={this.state.open}>
-                    <Link to="/"><MenuItem>Home</MenuItem></Link>
-                    <Link to="/Search"><MenuItem>Search</MenuItem></Link>
+                    <Link  onTouchTap={this.handleToggle} to="/"><MenuItem>Home</MenuItem></Link>
+                    <Link  onTouchTap={this.handleToggle} to="/Search"><MenuItem>Search</MenuItem></Link>
                     {this.state.user.displayName == undefined ?
-                        <MenuItem onClick={() => this.signIn()}>Sign In</MenuItem> :
-                        <MenuItem onClick={() => this.signOut()}>{this.state.user.displayName}</MenuItem>
+                        <MenuItem  onTouchTap={this.handleToggle} onClick={() => this.signIn()}>Sign In</MenuItem> :
+                        <MenuItem  onTouchTap={this.handleToggle} onClick={() => this.signOut()}>Sign Out</MenuItem>
                     }
                     <MenuItem onTouchTap={this.handleToggle}>Close</MenuItem>
                 </Drawer>
