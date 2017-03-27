@@ -58,12 +58,12 @@ class GuideList extends React.Component {
         this.filterDuplicateGuides();   
         return (
             <ul>
-                {this.props.userGuides && this.state.uid &&
+                {this.props.userGuides&&
                     this.props.userGuides.map((guide) => {
                         return <GuideListItem key={guide.id} guide={guide} userGuide={true} uid={this.state.uid}></GuideListItem>
                     })
                 }
-                {this.props.guides && this.state.uid &&
+                {this.props.guides&&
                     this.props.guides.map((guide) => {
                         return <GuideListItem key={guide.id} userGuide={false} guide={guide} uid={this.state.uid}></GuideListItem>
                     })

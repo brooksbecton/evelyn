@@ -13,7 +13,7 @@ import TopNavBar from './TopNavBar/TopNavBar'
 
 const style = {
   "mainContainer": {
-    "padding": "30px"
+    "padding": "2vw"
   }
 }
 
