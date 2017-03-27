@@ -3,6 +3,11 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import * as firebase from "firebase";
 
+const style = {
+    "guideCard": {
+        "padding": "15px"
+    }
+}
 
 export default class GuideListItem extends React.Component {
 
@@ -47,7 +52,7 @@ export default class GuideListItem extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={style.guideCard}>
                 {this.state.guide &&
                     <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                         <CardHeader

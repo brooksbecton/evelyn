@@ -10,19 +10,28 @@ import Search from './Search'
 import Welcome from './Welcome'
 import TopNavBar from './TopNavBar/TopNavBar'
 
+
+const style = {
+  "mainContainer": {
+    "padding": "30px"
+  }
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
- 
+
   render() {
     return (
       <MuiThemeProvider>
         <Router>
           <div>
             <TopNavBar></TopNavBar>
-            <Route exact={true} path="/" component={Welcome}></Route>
-            <Route path="/Search" component={Search}></Route>
+            <div style={style.mainContainer}>
+              <Route exact={true} path="/" component={Welcome}></Route>
+              <Route path="/Search" component={Search}></Route>
+            </div>
           </div>
         </Router>
       </MuiThemeProvider>

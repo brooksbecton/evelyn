@@ -21,6 +21,12 @@ const config = {
 firebase.initializeApp(config);
 const provider = new firebase.auth.GoogleAuthProvider();
 
+const style = {
+    "menuLink": {
+        "textDecoration": "none"
+    }
+}
+
 export default class TopNavBar extends React.Component {
     constructor(props) {
         super(props);
@@ -93,8 +99,8 @@ export default class TopNavBar extends React.Component {
                     onTouchTap={this.handleToggle}
                 />
                 <Drawer onTouchTap={this.handleToggle} open={this.state.open}>
-                    <Link  onTouchTap={this.handleToggle} to="/"><MenuItem>Home</MenuItem></Link>
-                    <Link  onTouchTap={this.handleToggle} to="/Search"><MenuItem>Search</MenuItem></Link>
+                    <Link style={style.menuLink} onTouchTap={this.handleToggle} to="/"><MenuItem>Home</MenuItem></Link>
+                    <Link style={style.menuLink} onTouchTap={this.handleToggle} to="/Search"><MenuItem>Search</MenuItem></Link>
                     {this.state.user.displayName == undefined ?
                         <MenuItem  onTouchTap={this.handleToggle} onClick={() => this.signIn()}>Sign In</MenuItem> :
                         <MenuItem  onTouchTap={this.handleToggle} onClick={() => this.signOut()}>Sign Out</MenuItem>
