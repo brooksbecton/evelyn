@@ -11,16 +11,23 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   },
-  entry: './client/index.js',
+  entry: './client/',
   output: {
     path: './dist',
     filename: 'js/index_bundle.js'
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
-      {test: /\.css$/,loader: "css-loader"}
+      { 
+        test: /\.js$/, 
+        loader: 'babel-loader', 
+        exclude: /node_modules/ 
+      },
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel-loader', 
+        exclude: /node_modules/ 
+      }
     ]
   },
   node: {
