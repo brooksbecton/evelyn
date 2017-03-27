@@ -21,6 +21,8 @@ export default class GuideListItem extends React.Component {
         this.state.uid = this.props.uid;
     }
 
+
+
     /**
      * When button is clicked, we'll save the guides id to the user's db
      */
@@ -36,10 +38,10 @@ export default class GuideListItem extends React.Component {
         });
     }
 
-    toggleButton(){
+    toggleButton() {
         let shown = this.state.showButton;
         shown = !shown;
-        this.setState({showButton: shown});
+        this.setState({ showButton: shown });
         this.setFavorite()
     }
 
@@ -47,17 +49,34 @@ export default class GuideListItem extends React.Component {
         return (
             <div>
                 {this.state.guide &&
-                    <Card>
+                    <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                         <CardHeader
                             title={this.state.guide.name}
                             subtitle={this.state.guide.description}
+                            actAsExpander={true}
+                            showExpandableButton={true}
                         />
                         <CardActions>
                             {!this.state.userGuide && this.state.showButton &&
                                 <FlatButton primary={true} onClick={() => this.toggleButton()}>FAVORITE</FlatButton>
                             }
-                            <FlatButton href={this.state.guide.url} target="_blank" label="Read More"></FlatButton>
+                            <FlatButton href={this.state.guide.url} target="_blank" label="Read Guide"></FlatButton>
                         </CardActions>
+                        <CardText expandable={true}>
+                            {this.state.guide.owner &&
+                                <div>
+                                    <strong>Author: </strong>
+                                    <a href={"mailto:" + this.state.guide.owner.email} target="_blank">{this.state.guide.owner.first_name} {this.state.guide.owner.last_name}</a>
+                                </div>
+                            }
+                            <p><strong>Published: </strong>
+                                {(this.state.guide.published).split(" ")[0]}</p>
+                            <p><strong>Last Updated: </strong>
+                                {(this.state.guide.updated).split(" ")[0]}</p>
+
+                            <p><strong>Visits: </strong>
+                                {this.state.guide.count_hit}</p>
+                        </CardText>
                     </Card>
                 }
             </div>

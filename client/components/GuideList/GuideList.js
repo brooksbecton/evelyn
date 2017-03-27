@@ -38,10 +38,6 @@ class GuideList extends React.Component {
 
     }
 
-    guideInGuides(guide, guides) {
-
-    }
-
     /**
      * Asks Firebase Auth for the current user
      * Sets state's uid to current user's uid

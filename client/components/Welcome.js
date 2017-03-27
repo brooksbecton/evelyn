@@ -32,7 +32,8 @@ class Welcome extends React.Component {
         const site_id = process.env.SITE_ID;
         const targetUrl = "//lgapi-us.libapps.com/1.1/guides/" + gid +
             "?site_id=" + site_id +
-            "&key=" + api_key;
+            "&key=" + api_key + 
+            "&expand=owner";
 
         return axios.get(targetUrl);
 
@@ -45,7 +46,7 @@ class Welcome extends React.Component {
         const api_key = process.env.API_KEY;
         const site_id = process.env.SITE_ID;
         const targetUrl = "//lgapi-us.libapps.com/1.1/guides/?site_id=" +
-            site_id + "&key=" + api_key + "&sort_by=count_hit";
+            site_id + "&key=" + api_key + "&sort_by=count_hit&expand=owner";
 
         let topGuides = [];
 

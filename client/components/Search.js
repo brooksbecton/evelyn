@@ -22,7 +22,8 @@ class Search extends React.Component {
     const api_key = process.env.API_KEY;
     const site_id = process.env.SITE_ID;
     const targetUrl = "//lgapi-us.libapps.com/1.1/guides/?site_id=" +
-      site_id + "&key=" + api_key + "&search_terms=" + q;
+      site_id + "&key=" + api_key + "&search_terms=" + q +
+      "&expand=owner";
     axios.get(targetUrl)
       .then(res => {
         const guides = res.data.map(obj => obj);
