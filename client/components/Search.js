@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import axios from 'axios'
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import * as firebase from "firebase";
+const provider = new firebase.auth.GoogleAuthProvider();
 
 import GuideList from './GuideList/GuideList'
 
@@ -9,7 +11,12 @@ import GuideList from './GuideList/GuideList'
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', guides: '' };
+    this.state = {
+      value: '',
+      guides: '',
+      uid: '',
+    };
+
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +31,7 @@ class Search extends React.Component {
     const targetUrl = "//lgapi-us.libapps.com/1.1/guides/?site_id=" +
       site_id + "&key=" + api_key + "&search_terms=" + q +
       "&expand=owner";
+      
     axios.get(targetUrl)
       .then(res => {
         const guides = res.data.map(obj => obj);

@@ -123,7 +123,7 @@ class Welcome extends React.Component {
                     <GuideList guides={this.state.guides} userGuides={this.state.userGuides}></GuideList>
                 }
                 {!this.state.uid &&
-                    <RaisedButton onClick={this.signIn} label="Sign In"></RaisedButton>
+                    <p>Loading...</p>
                 }
             </main >
         )

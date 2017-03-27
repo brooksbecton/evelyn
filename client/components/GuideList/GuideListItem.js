@@ -8,7 +8,7 @@ const style = {
     "guideCard": {
         "padding": "15px"
     },
-    "divider":{
+    "divider": {
         "margin-bottom": "10px"
     }
 }
@@ -27,7 +27,13 @@ export default class GuideListItem extends React.Component {
 
         this.state.guide = this.props.guide;
         this.state.userGuide = this.props.userGuide;
-        this.state.uid = this.props.uid;
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ uid: user.uid });
+            } else {
+                this.setState({ uid: '' });
+            }
+        });
     }
 
 
@@ -46,7 +52,7 @@ export default class GuideListItem extends React.Component {
             date: date,
         });
 
-        this.setState({userGuide: true});
+        this.setState({ userGuide: true });
     }
 
     toggleButton() {
@@ -60,8 +66,8 @@ export default class GuideListItem extends React.Component {
         const uid = this.state.uid;
 
         const usersFavGuidesRef = firebase.database().ref('users/' + uid + "/guides/" + gid + "/reviews/").remove();
-        this.setState({userGuide: false});
-        
+        this.setState({ userGuide: false });
+
     }
     render() {
         return (
@@ -76,18 +82,18 @@ export default class GuideListItem extends React.Component {
                         />
                         <CardActions>
                             {this.state.uid &&
-                                <div>
+                                <span>
                                     {!this.state.userGuide ?
                                         <FlatButton primary={true} onClick={() => this.toggleButton()} onClick={() => this.setFavorite()}>FAVORITE</FlatButton> :
                                         <FlatButton secondary={true} onClick={() => this.toggleButton()} onClick={() => this.unSetFavorite()}>UNFAVORITE</FlatButton>
                                     }
-                                </div>
+                                </span>
                             }
                             <FlatButton href={this.state.guide.url} target="_blank" label="Read Guide"></FlatButton>
                         </CardActions>
                         <CardText expandable={true}>
-                            <Divider style={style.divider}/>
-                            
+                            <Divider style={style.divider} />
+
                             {this.state.guide.owner &&
                                 <div>
                                     <strong>Author: </strong>
