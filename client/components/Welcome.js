@@ -121,7 +121,7 @@ class Welcome extends React.Component {
                 {this.state.guides && this.state.userGuides &&
                     <GuideList guides={this.state.guides} userGuides={this.state.userGuides}></GuideList>
                 }
-                {!this.state.uid &&
+                {this.state.guides.length == 0 &&
                     <p>Loading...</p>
                 }
             </main >
