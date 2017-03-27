@@ -36,7 +36,6 @@ class Welcome extends React.Component {
             "&expand=owner";
 
         return axios.get(targetUrl);
-
     }
     /**
      * Pulls the top N guides based on hit count, where N is the state's guideCount

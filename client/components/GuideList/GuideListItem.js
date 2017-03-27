@@ -19,17 +19,21 @@ export default class GuideListItem extends React.Component {
         super(props)
 
         this.state = {
-            guide: undefined,
-            userGuide: undefined,
+            guide: undefined, //The current guide object
+            userGuide: undefined,// Bool to show whether guide is in users fav list
             showButton: true,  //Bool for showing button or not
             uid: null  //The user's id that is trying to favorite
         }
 
         this.state.guide = this.props.guide;
+
+
         this.state.userGuide = this.props.userGuide;
+
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ uid: user.uid });
+                this.guideFavorited(this.state.guide.id);
             } else {
                 this.setState({ uid: '' });
             }
@@ -55,20 +59,42 @@ export default class GuideListItem extends React.Component {
         this.setState({ userGuide: true });
     }
 
+    /**
+     * Toggles favorite button to favorite or unfavorite
+     */
     toggleButton() {
         let shown = this.state.showButton;
         shown = !shown;
         this.setState({ showButton: shown });
     }
 
+    /**
+     * Removes reference on db and togglesButton()
+     */
     unSetFavorite() {
         const gid = this.state.guide.id;
         const uid = this.state.uid;
 
-        const usersFavGuidesRef = firebase.database().ref('users/' + uid + "/guides/" + gid + "/reviews/").remove();
+        firebase.database().ref('users/' + uid + "/guides/" + gid + "/reviews/").remove();
         this.setState({ userGuide: false });
 
     }
+
+    /**
+     *  Checkis if a guide is in a users fav list
+     *  @param targetGid: the id of the gid you want to check
+     */
+    guideFavorited(targetGid){
+        const usersFavGuidesRef = firebase.database().ref('users/' + this.state.uid + "/guides");
+        usersFavGuidesRef.once('value', (snapshot) => {
+            for (let gid in snapshot.val()) {
+                if(targetGid == gid){
+                    this.setState({userGuide: true});
+                }
+            }
+        });
+    }
+
     render() {
         return (
             <div style={style.guideCard}>
