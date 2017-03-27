@@ -7,7 +7,6 @@ import {
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import * as firebase from "firebase";
 
@@ -90,7 +89,7 @@ export default class TopNavBar extends React.Component {
         return (
             <nav>
                 <AppBar
-                    Title="Evelyn"
+                    title="Evelyn"
                     onTouchTap={this.handleToggle}
                 />
                 <Drawer onTouchTap={this.handleToggle} open={this.state.open}>
