@@ -75,9 +75,13 @@ export default class GuideListItem extends React.Component {
                             showExpandableButton={true}
                         />
                         <CardActions>
-                            {!this.state.userGuide ?
-                                <FlatButton primary={true} onClick={() => this.toggleButton()} onClick={() => this.setFavorite()}>FAVORITE</FlatButton> :
-                                <FlatButton secondary={true} onClick={() => this.toggleButton()} onClick={() => this.unSetFavorite()}>UNFAVORITE</FlatButton>
+                            {this.state.uid &&
+                                <div>
+                                    {!this.state.userGuide ?
+                                        <FlatButton primary={true} onClick={() => this.toggleButton()} onClick={() => this.setFavorite()}>FAVORITE</FlatButton> :
+                                        <FlatButton secondary={true} onClick={() => this.toggleButton()} onClick={() => this.unSetFavorite()}>UNFAVORITE</FlatButton>
+                                    }
+                                </div>
                             }
                             <FlatButton href={this.state.guide.url} target="_blank" label="Read Guide"></FlatButton>
                         </CardActions>
